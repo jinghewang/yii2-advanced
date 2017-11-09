@@ -42,6 +42,10 @@ return [
             'rules' => [
             ],
         ],
+        'utils' => [
+            'class' => 'frontend\Components\UtilsComponent',
+            'name'  => 'hbd',
+        ],
     ],
     'modules' => [
         'admin' => [
