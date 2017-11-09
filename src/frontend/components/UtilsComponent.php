@@ -1,9 +1,17 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: hbd
- * Date: 2017/11/9
- * Time: 上午11:37
+ * 自定义组件
+ * @author wjh 2017-11-09
+ *
+ * 注册：
+ * 'utils' => [
+ *  'class' => 'frontend\Components\UtilsComponent',
+ *  'name'  => 'hbd',
+ * ],
+ *
+ * 使用：
+ * $msg = \Yii::$app->utils->hello('qqq');
+ *
  */
 
 namespace frontend\Components;

@@ -17,9 +17,6 @@ class DefaultController extends Controller
     {
         //组件调用
         $msg = \Yii::$app->utils->hello('qqq');
-        echo $msg;
-        die;
-
-        return $this->render('index');
+        return $this->render('index',['msg'=>$msg]);
     }
 }

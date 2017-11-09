@@ -1,3 +1,8 @@
+<?php
+use yii\helpers\Html;
+
+?>
+
 <div class="admin-default-index">
     <h1><?= $this->context->action->uniqueId ?></h1>
     <p>
@@ -8,5 +13,9 @@
     <p>
         You may customize this page by editing the following file:<br>
         <code><?= __FILE__ ?></code>
+
+        <pre>
+        <?= Html::encode($msg) ?>
+        </pre>
     </p>
 </div>
