@@ -229,4 +229,14 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+    /**
+     * Displays homepage.
+     *
+     * @return mixed
+     */
+    public function actionOffline()
+    {
+        return $this->render('offline', ['message' => "当前已经下线"]);
+    }
 }
