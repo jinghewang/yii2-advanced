@@ -2,9 +2,11 @@
 
 namespace frontend\controllers;
 
+use Woodw\Utils\Utils;
 use Yii;
 use frontend\models\Person;
 use frontend\models\PersonSearch;
+use yii\helpers\StringHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -25,6 +27,12 @@ class PersonController extends Controller
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+            [
+                //自定义过滤器 @author wjh 2017-11-15
+                'class' => 'frontend\filters\NameFilter',
+                'only' => ['create', 'update'],
+                'name' => Yii::$app->request->get(),
             ],
         ];
     }
