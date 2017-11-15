@@ -24,12 +24,27 @@ class UtilsComponent extends Component {
 
     private $name;
 
-    public static $num = 0;
+    public static $num;
+
+    /**
+     * @return mixed
+     */
+    public static function getNum() {
+        return self::$num;
+    }
+
+    /**
+     * @param mixed $num
+     */
+    public static function setNumPP() {
+        self::$num++;
+    }
 
     /**
      * UtilsComponent constructor.
      */
     public function __construct() {
+        print_r('--__construct-');
         self::$num++;
     }
 

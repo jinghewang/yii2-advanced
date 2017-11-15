@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use frontend\widgets\HbdWidget;
+
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\PersonSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -32,3 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>
+
+<?php echo HbdWidget::widget([
+    'items'   => [
+        'wjh', 'lht'
+    ],
+    'options' => ['class' => 'nav-pills'], // set this to nav-tab to get tab-styled navigation
+]); ?>

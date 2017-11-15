@@ -15,8 +15,14 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
+        /**
+         * @var \frontend\Components\UtilsComponent $utils
+         */
+
         //组件调用
-        $msg = \Yii::$app->utils->hello('qqq');
-        return $this->render('index',['msg'=>$msg]);
+        $utils = \Yii::$app->utils;
+        $utils->setNumPP();
+        $msg = $utils->hello('qqq');
+        return $this->render('index', ['msg' => $msg]);
     }
 }
