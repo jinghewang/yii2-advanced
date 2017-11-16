@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\events\MessageEvent;
 use Woodw\Utils\Helpers\UtilsHelper;
 use Woodw\Utils\Utils;
 use Yii;
@@ -76,11 +77,13 @@ class PersonController extends Controller
 
         //绑定事件
         $this->on('click', function ($event) {
-            UtilsHelper::print_p('begin click:' . json_encode($event->data));
+            UtilsHelper::print_p('begin click:' . json_encode($event->data) . $event->message);
         }, [123, 456]);
 
         //触发事件
-        $this->trigger('click');
+        $event = new MessageEvent();
+        $event->message = 'hbd';
+        $this->trigger('click',$event);
 
 
         $session = Yii::$app->session;
