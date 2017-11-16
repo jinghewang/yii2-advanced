@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use Woodw\Utils\Helpers\UtilsHelper;
 use Woodw\Utils\Utils;
 use Yii;
 use frontend\models\Person;
@@ -63,6 +64,30 @@ class PersonController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
+
+    /**
+     * Displays a single Person model.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionTest($id=null)
+    {
+
+        $this->on('click',function($event){
+            UtilsHelper::print_p('begin click');
+        });
+
+
+        $this->trigger('click');
+
+
+
+        $session = Yii::$app->session;
+        $session->setFlash('postDeleted', 'You have successfully deleted your post.');
+        return $this->render('test', ['session' => $session]);
+    }
+
 
     /**
      * Creates a new Person model.

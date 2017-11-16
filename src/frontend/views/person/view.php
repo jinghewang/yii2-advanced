@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use \yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Person */
@@ -13,6 +14,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="person-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <h2><?php echo Url::to(['site/offline','id' => 100]) ?></h2>
+
+    <h2><?php echo Url::to(['post/index'], true); ?></h2>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->code], ['class' => 'btn btn-primary']) ?>

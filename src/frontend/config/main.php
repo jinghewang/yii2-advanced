@@ -40,6 +40,14 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                [
+                    'pattern' => 'person2',
+                    'route' => 'person/index',
+                    'suffix' => '',
+                ],
+                [
+                    'class' => 'frontend\rules\CarUrlRule',
+                ]
             ],
         ],
         'utils' => [
@@ -53,5 +61,5 @@ return [
         ],
     ],
     'params' => $params,
-    'catchAll' => ['site/offline'],
+    //'catchAll' => ['site/offline'],
 ];
