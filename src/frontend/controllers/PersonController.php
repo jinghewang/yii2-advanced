@@ -74,13 +74,13 @@ class PersonController extends Controller
     public function actionTest($id=null)
     {
 
-        $this->on('click',function($event){
-            UtilsHelper::print_p('begin click');
-        });
+        //绑定事件
+        $this->on('click', function ($event) {
+            UtilsHelper::print_p('begin click:' . json_encode($event->data));
+        }, [123, 456]);
 
-
+        //触发事件
         $this->trigger('click');
-
 
 
         $session = Yii::$app->session;
