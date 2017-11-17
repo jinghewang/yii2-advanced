@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use frontend\behaviors\MyBehavior;
 use frontend\events\Developer;
 use frontend\events\Dog;
 use frontend\events\MessageEvent;
@@ -12,6 +13,7 @@ use Yii;
 use frontend\models\Person;
 use frontend\models\PersonSearch;
 use yii\base\Event;
+use yii\db\ActiveRecord;
 use yii\helpers\StringHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -34,12 +36,11 @@ class PersonController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-            [
-                //自定义过滤器 @author wjh 2017-11-15
-                'class' => 'frontend\filters\NameFilter',
-                'only' => ['create', 'update'],
-                'name' => Yii::$app->request->get(),
-            ],
+            'myBehavior' => [
+                'class' => MyBehavior::className(),
+                'prop1' => 'value1',
+                'prop2' => 'value2',
+            ]
         ];
     }
 
@@ -78,18 +79,10 @@ class PersonController extends Controller
      */
     public function actionTest($id=null)
     {
+        $behavior = $this->getBehavior('myBehavior');
+        $this->trigger(ActiveRecord::EVENT_BEFORE_VALIDATE);
+        echo $this->foo();
 
-        Event::on('frontend\interfaces\DanceEventInterface', DanceEventInterface::EVENT_DANCE, function ($event) {
-            Yii::trace(get_class($event->sender) . ' just danced'); // Will log that Dog or Developer danced
-        });
-
-        // trigger event for Dog class
-        //Event::trigger(Dog::className(), DanceEventInterface::EVENT_DANCE);
-
-        // trigger event for Developer class
-        //Event::trigger(Developer::className(), DanceEventInterface::EVENT_DANCE);
-
-        Event::trigger('frontend\interfaces\DanceEventInterface', DanceEventInterface::EVENT_DANCE);
 
 
         $session = Yii::$app->session;
