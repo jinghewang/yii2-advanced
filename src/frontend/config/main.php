@@ -27,7 +27,12 @@ return [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
         ],
-        'log' => \frontend\services\MonologBuilder::build('-t-s-'),
+        'log' => function(){
+            $logger = new \Monolog\Logger('xoo');
+            $logger->pushHandler(new \Monolog\Handler\PHPConsoleHandler());
+            // ... other initializations ...
+            return $logger;
+        },
        /* 'log2' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
