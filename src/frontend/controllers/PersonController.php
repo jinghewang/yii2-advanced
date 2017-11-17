@@ -2,12 +2,16 @@
 
 namespace frontend\controllers;
 
+use frontend\events\Developer;
+use frontend\events\Dog;
 use frontend\events\MessageEvent;
+use frontend\interfaces\DanceEventInterface;
 use Woodw\Utils\Helpers\UtilsHelper;
 use Woodw\Utils\Utils;
 use Yii;
 use frontend\models\Person;
 use frontend\models\PersonSearch;
+use yii\base\Event;
 use yii\helpers\StringHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -75,15 +79,17 @@ class PersonController extends Controller
     public function actionTest($id=null)
     {
 
-        //绑定事件
-        $this->on('click', function ($event) {
-            UtilsHelper::print_p('begin click:' . json_encode($event->data) . $event->message);
-        }, [123, 456]);
+        Event::on('frontend\interfaces\DanceEventInterface', DanceEventInterface::EVENT_DANCE, function ($event) {
+            Yii::trace(get_class($event->sender) . ' just danced'); // Will log that Dog or Developer danced
+        });
 
-        //触发事件
-        $event = new MessageEvent();
-        $event->message = 'hbd';
-        $this->trigger('click',$event);
+        // trigger event for Dog class
+        //Event::trigger(Dog::className(), DanceEventInterface::EVENT_DANCE);
+
+        // trigger event for Developer class
+        //Event::trigger(Developer::className(), DanceEventInterface::EVENT_DANCE);
+
+        Event::trigger('frontend\interfaces\DanceEventInterface', DanceEventInterface::EVENT_DANCE);
 
 
         $session = Yii::$app->session;
