@@ -79,9 +79,11 @@ class PersonController extends Controller
      */
     public function actionTest($id=null)
     {
-        $behavior = $this->getBehavior('myBehavior');
-        $this->trigger(ActiveRecord::EVENT_BEFORE_VALIDATE);
-        echo $this->foo();
+
+        $search = Yii::$app->search;
+        $search->search('wjh');
+
+
 
 
 

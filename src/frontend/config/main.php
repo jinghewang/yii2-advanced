@@ -1,4 +1,7 @@
 <?php
+
+use frontend\services\SolrServiceBuilder;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -25,6 +28,14 @@ return [
             'name' => 'advanced-frontend',
         ],
         'log' => [
+            'class' => 'Monolog\Logger',
+            'handlers' =>[
+                [
+                    'class' => 'Monolog\Handler\PHPConsoleHandler',
+                ],
+            ],
+        ],
+        'log2' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
@@ -54,6 +65,7 @@ return [
             'class' => 'frontend\Components\UtilsComponent',
             'name'  => 'hbd',
         ],
+        'search' => SolrServiceBuilder::build('127.0.0.1'),
     ],
     'modules' => [
         'admin' => [
