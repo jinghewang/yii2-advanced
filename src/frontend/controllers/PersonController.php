@@ -80,8 +80,15 @@ class PersonController extends Controller
     public function actionTest($id=null)
     {
 
-        $search = Yii::$app->search;
-        $search->search('wjh');
+        //UtilsHelper::print_p(Yii::$app->log);
+
+        Yii::$app->log->addInfo('---s--sd-s--');
+
+        //$log = Yii::$app->log3;
+
+        //var_dump($log);die;
+
+        //$log->log('xxoo',1);
 
 
 

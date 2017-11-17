@@ -27,15 +27,8 @@ return [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
         ],
-        'log' => [
-            'class' => 'Monolog\Logger',
-            'handlers' =>[
-                [
-                    'class' => 'Monolog\Handler\PHPConsoleHandler',
-                ],
-            ],
-        ],
-        'log2' => [
+        'log' => \frontend\services\MonologBuilder::build('-t-s-'),
+       /* 'log2' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
@@ -43,7 +36,7 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
-        ],
+        ],*/
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
