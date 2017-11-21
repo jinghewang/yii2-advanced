@@ -79,21 +79,25 @@ class PersonController extends Controller
      */
     public function actionTest($id=null)
     {
+        /*$posts = Yii::$app->db->createCommand('select * from person')
+            ->queryOne();
+        UtilsHelper::print_p($posts);*/
 
-        //UtilsHelper::print_p(Yii::$app->log);
+        var_dump(Yii::$app->user);
 
-        Yii::$app->log->addInfo('---s--sd-s--');
-
-        //$log = Yii::$app->log3;
-
-        //var_dump($log);die;
-
-        //$log->log('xxoo',1);
+        die;
 
 
+        $code2 = '11';
 
+        $posts = Yii::$app->db->createCommand('select * from person where code=:code or code=:code2')
+            ->bindValues([':code' => 'RU'])
+            ->bindParam(':code2', $code2)
+            ->queryAll();
 
+        UtilsHelper::print_p($posts);
 
+        //--
         $session = Yii::$app->session;
         $session->setFlash('postDeleted', 'You have successfully deleted your post.');
         return $this->render('test', ['session' => $session]);

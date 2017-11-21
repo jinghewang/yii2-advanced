@@ -7,6 +7,11 @@ return [
             'username' => 'root',
             'password' => 'root',
             'charset' => 'utf8',
+            'on afterOpen' => function($event) {
+                // $event->sender refers to the DB connection
+                //$event->sender->createCommand("SET time_zone = 'UTC'")->execute();
+                Yii::trace('afterOpen',__METHOD__);
+            }
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',

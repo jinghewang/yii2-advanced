@@ -17,7 +17,19 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'parsers'   => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
+        'response' => [
+            /*'formatters' => [
+                \yii\web\Response::FORMAT_JSON => [
+                    'class' => 'yii\web\JsonResponseFormatter',
+                    'prettyPrint' => YII_DEBUG, // use "pretty" output in debug mode
+                ],
+            ],*/
+        ],
+
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
@@ -27,13 +39,7 @@ return [
             // this is the name of the session cookie used for login on the frontend
             'name' => 'advanced-frontend',
         ],
-        'log' => function(){
-            $logger = new \Monolog\Logger('xoo');
-            $logger->pushHandler(new \Monolog\Handler\PHPConsoleHandler());
-            // ... other initializations ...
-            return $logger;
-        },
-       /* 'log2' => [
+       'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
@@ -41,7 +47,7 @@ return [
                     'levels' => ['error', 'warning'],
                 ],
             ],
-        ],*/
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
@@ -56,7 +62,16 @@ return [
                 ],
                 [
                     'class' => 'frontend\rules\CarUrlRule',
-                ]
+                ],
+                [
+                    'class'      => 'yii\rest\UrlRule',
+                    'controller' => 'province',
+                    //'only' => ['delete', 'create', 'update'],
+                    //'except' => ['delete', 'create', 'update'],
+                    'extraPatterns' => [
+                        'GET test2' => 'test',
+                    ],
+                ],
             ],
         ],
         'utils' => [
